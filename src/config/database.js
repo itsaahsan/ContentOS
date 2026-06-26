@@ -3,7 +3,12 @@ require('dotenv').config();
 
 const isProduction = process.env.NODE_ENV === 'production';
 
-const sequelize = new Sequelize(process.env.DATABASE_URL, {
+let databaseUrl = process.env.DATABASE_URL;
+if (isProduction && databaseUrl) {
+  databaseUrl = databaseUrl.replace(/[?&]sslmode=[^&]*/g, '').replace(/\?$/, '');
+}
+
+const sequelize = new Sequelize(databaseUrl, {
   dialect: 'postgres',
   logging: false,
   dialectOptions: isProduction ? {
