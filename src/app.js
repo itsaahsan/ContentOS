@@ -4,7 +4,6 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const compression = require('compression');
 const hpp = require('hpp');
-const path = require('path');
 const { setupSwagger } = require('./config/swagger');
 const AppError = require('./utils/AppError');
 const { globalLimiter } = require('./middleware/rateLimiter');
@@ -36,10 +35,6 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(globalLimiter);
 
 setupSwagger(app);
-
-app.get('/favicon.png', (req, res) => {
-  res.sendFile(path.join(__dirname, '../icons8-stumbleupon-96.png'));
-});
 
 app.get('/', (req, res) => {
   res.json({
