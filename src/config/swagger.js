@@ -72,7 +72,7 @@ const options = {
 const swaggerSpec = swaggerJsdoc(options);
 
 const setupSwagger = (app) => {
-  app.use('/api/docs', express.static(path.join(__dirname, '../..')));
+  app.use('/icons8-stumbleupon-96.png', express.static(path.join(__dirname, '../../icons8-stumbleupon-96.png')));
 
   app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
     customCss: '.swagger-ui .topbar { display: none }',
