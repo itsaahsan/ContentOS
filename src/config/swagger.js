@@ -1,5 +1,6 @@
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
+const path = require('path');
 
 const options = {
   definition: {
@@ -72,7 +73,8 @@ const swaggerSpec = swaggerJsdoc(options);
 const setupSwagger = (app) => {
   app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
     customCss: '.swagger-ui .topbar { display: none }',
-    customSiteTitle: 'ContentOS Docs',
+    customSiteTitle: 'ContentOS',
+    favicon: path.join(__dirname, '../../icons8-stumbleupon-96.png'),
   }));
 
   app.get('/api/docs.json', (req, res) => {
